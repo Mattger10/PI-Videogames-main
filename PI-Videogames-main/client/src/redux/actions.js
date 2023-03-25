@@ -85,7 +85,14 @@ export function orderByName(payload) {
   };
 }
 
-export function getDetail(id){
+export function orderByRating(payload){
+  return{
+      type: "ORDER_BY_RATING",
+      payload,
+  }
+}
+
+export function getDetails(id){
   return async function (dispatch){
     try{
       var json = await axios.get(`http://localhost:3001/videogames/${id}`);

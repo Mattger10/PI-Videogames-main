@@ -1,8 +1,9 @@
 const initialState = {
   videogames: [],
   allVideogames: [],
-  platforms: [],
-  detail: []
+  detail: [],
+  platforms: []
+  
 };
 
 function rootReducer(state = initialState, action) {
@@ -86,6 +87,35 @@ function rootReducer(state = initialState, action) {
         videogames: sortedArr,
       };
       
+      case "ORDER_BY_RATING":
+            // let copyStatus = [...state.copyAllVideoGames];
+            // if(action.payload === "Order-Rating"){
+            //     return copyStatus;
+            // }
+            let arrayRating = action.payload === "Men-May" ?
+            state.allVideogames.sort(function(a, b){
+                if(a.rating > b.rating){// "a" es mayor a "b", entonces pone "a" detras de "b" 
+                    return 1;
+                }
+                if(a.rating < b.rating){
+                    return -1;
+                }
+                return 0;
+              }):
+              state.allVideoGames.sort(function(a, b){
+                if(a.rating < b.rating){
+                    return 1;
+                }
+                if(a.rating > b.rating){
+                    return -1;
+                }
+                return 0;
+            })
+            return {
+                ...state,
+                allVideoGames: arrayRating
+            }
+
       case "GET_DETAILS":
         return {
           ...state,

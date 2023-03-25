@@ -1,17 +1,59 @@
 import React from 'react';
+import styled from 'styled-components';
 
 export default function Loading() {
     return (
-        <div>
-        <img id="loading."
-          src="https://i.pinimg.com/originals/a0/57/94/a05794c4ff141988286947dfd7df17dc.gif"
-          alt="Loading"
-        />
-        {/* <div>
-        <img id="loadingBar" src="https://media.tenor.com/EYX1u_zeHXYAAAAM/loading-progress-bar.gif" alt="loading"/>
-        </div> */}
-
-        <h1>Cargando...</h1>
-      </div>
+        <LoadingContainer>
+         <div></div>
+        </LoadingContainer>
     );
   }
+
+  const LoadingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  div {
+  width: 10px;
+  height: 10px;
+  border-radius: 8px;
+  background-color: #47a7ff44;
+
+  
+  .loader div
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #47a7ff;
+  animation: width7435 5s linear infinite;
+  transition: all;
+  }
+  @keyframes width7435 {
+    from {
+      /*width: 0;*/
+      transform: scaleX(0);
+    }
+  
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes width7435 {
+    from {
+      /*width: 0;*/
+      transform: scaleX(0);
+    }
+  
+    to {
+      transform: scaleX(1);
+    }
+  }
+  `
+  
+

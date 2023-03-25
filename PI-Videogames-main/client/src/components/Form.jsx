@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { getGenres, postVideogames, getPlatforms } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import validation from "../redux/validations";
+import styled from "styled-components";
 
 export default function VideogameCreate() {
   const dispatch = useDispatch();
@@ -105,98 +106,141 @@ function handleDeleteGenres(e){
     })
     history.push('/home')
   }
-
-//   function handleCheck(e){
-//     if(e.target.checked){
-//         setInput({
-//             ...input,
-//             status: e.target.value 
-//         })
-//     }
-//   }
-
   
-
   return (
-    <div>
+    <Container>
       <Link to="/home">
-        <button>Volver a inicio</button>
+        <Button>Volver a inicio</Button>
       </Link>
-      <h1>¡Creá tu videojuego!</h1>
+      <Title>¡Creá tu videojuego!</Title>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nombre: </label>
-          <input placeholder="Ingresar nombre" type="text" value={input.name} name="name" onChange={handleChange} />
-          <span>{errors.name && <p>{errors.name}</p>} </span>
-        </div>
-        <div>
-          <label>Descripción: </label>
-          <input placeholder="Ingresar descripción" type="text" value={input.description} name="description" onChange={handleChange} /> 
-          {errors.description && <p>{errors.description}</p>}
-        </div>
-        <div>
-          <label>Fecha de lanzamiento: </label>
-          <input type="date" value={input.released} name="released" onChange={handleChange} />
-          {errors.released && <p>{errors.released}</p>}
-        </div>
-        <div>
-          <label>Rating: </label>
-          <input placeholder="Ingresar rating" type="number" value={input.rating} name="rating" onChange={handleChange} />
-          {errors.rating && <p>{errors.rating}</p>}
-        </div>
-        <div>
-          <label>Imagen: </label>
-          <input placeholder="Ingresar imagen" type="text" value={input.image} name="image" onChange={handleChange} />
-          {errors.image && <p>{errors.image}</p>}
-        </div>
-        <div>
-        <h6>Plataformas: </h6>
-        <select onChange={(e) => handleSelect(e)}>
-        <option value="All">Seleccionar plataformas</option>
-            {platformsList && platformsList.map((platform) => {
-              return (
-                <option key={platform} value={platform}>{platform}</option>
-              )
-              })}
-        </select>
-        {errors.platforms && <p>{errors.platforms}</p>}
-        </div>
-        <div>
-            {input.platforms.map((e) => (
-              <li>
-                <div>
-                  {e + " "}
-                  <button type="button" onClick={() => handleDeletePlatforms(e)}>X</button>
-                </div>
-              </li>
-            ))}
-        </div>
-        <div>
-                    <h6>Géneros: </h6>
-                    <select onChange={(e) => handleSelectGenres(e)}>
-                        <option value="All">Seleccionar género</option>
+        <Div>
+          <Input placeholder="Ingresar nombre" type="text" value={input.name} name="name" onChange={handleChange} />
+          {errors.name?.map && <Error>{errors.name}</Error>}
+        </Div>
+        <Div>
+          {/* <label>Descripción: </label> */}
+          <Input placeholder="Ingresar descripción" type="text" value={input.description} name="description" onChange={handleChange} /> 
+          {errors.description?.map && <Error>{errors.description}</Error>}
+        </Div>
+        <Div>
+          {/* <label>Fecha de lanzamiento: </label> */}
+          <Input type="date" value={input.released} name="released" onChange={handleChange} />
+          {errors.released?.map && <Error>{errors.released}</Error>}
+        </Div>
+        <Div>
+          {/* <label>Rating: </label> */}
+          <Input placeholder="Ingresar rating" type="number" value={input.rating} name="rating" onChange={handleChange} />
+          {errors.rating?.map && <Error>{errors.rating}</Error>}
+        </Div>
+        <Div>
+          {/* <label>Imagen: </label> */}
+          <Input placeholder="Ingresar URL de imagen"type="text"  value={input.image} name="image" onChange={handleChange} />
+          {errors.image?.map && <Error>{errors.image}</Error>}
+          <input type="file" />
+        </Div>
+        <SelectWrapper>
+                    {/* <label>Géneros: </label> */}
+                    <Select onChange={(e) => handleSelectGenres(e)}>
+                        <Option value="All">Seleccionar género</Option>
                         {genres && 
                         genres.map((genre) =>{
                             return(
-                            <option  key={genre.id} value={genre.name}>{genre.name}</option>
+                            <Option  key={genre.id} value={genre.name}>{genre.name}</Option>
                         )})
                         }
-                    </select>
-                </div>
+                    </Select>
+                </SelectWrapper>
                 <div >
                     {input.genres.map((el) => (
-                        <li key={el} >
+                       
                             <div >
                                {el + " "} 
-                               <button  type="button" onClick={() => handleDeleteGenres(el)}>x</button>
+                               <Button  type="button" onClick={() => handleDeleteGenres(el)}>x</Button>
                             </div>
-                        </li>
+                        
                     ))}
                 </div>
+        <SelectWrapper>
+        {/* <label>Plataformas: </label> */}
+        <Select onChange={(e) => handleSelect(e)}>
+        <Option value="All">Seleccionar plataformas</Option>
+            {platformsList && platformsList.map((platform) => {
+              return (
+                <Option key={platform} value={platform}>{platform}</Option>
+              )
+              })}
+        </Select>
+        {errors.platforms?.map && <Error>{errors.platforms}</Error>}
+        </SelectWrapper>
+        <div>
+            {input.platforms.map((e) => (
+              
                 <div>
-                {errors.name ? null : <button type="submit" onSubmit={(e) => handleSubmit(e)}>Crear videojuego</button>}     
+                  {e + " "}
+                  <Button type="button" onClick={() => handleDeletePlatforms(e)}>X</Button>
+                </div>
+              
+            ))}
+        </div>
+                <div>
+                {errors.name ? null : <Button type="submit" onSubmit={(e) => handleSubmit(e)}>Crear videojuego</Button>}     
                 </div>
       </form>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  margin-bottom: 2rem;
+`;
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+`;
+
+const Input = styled.input`
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+`;
+
+const SelectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+`;
+
+const Select = styled.select`
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+`;
+
+const Option = styled.option`
+  padding: 0.5rem;
+`;
+
+const Button = styled.button`
+  background-color: #008CBA;
+  color: #fff;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+`;
+
+const Error = styled.p`
+  color: red;
+`;

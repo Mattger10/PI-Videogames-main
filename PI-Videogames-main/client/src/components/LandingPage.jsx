@@ -52,7 +52,7 @@ min-width: 300px;
   font-weight: 700;
   color: white;
   background: #4FD1C5;
-background: linear-gradient(90deg, #2965FD 0%, #002B98 100%);
+  background: linear-gradient(90deg, #2965FD 0%, #002B98 100%);
   border: none;
   border-radius: 1000px;
   box-shadow: 12px 12px 24px #611FFF;

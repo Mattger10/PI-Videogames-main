@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function Paginado ({videogamesPerPage, allVideogames, paginado}){
     const pageNumbers = []
@@ -8,16 +9,40 @@ export default function Paginado ({videogamesPerPage, allVideogames, paginado}){
     }
 
     return(
-        <nav>
-            <ul className="paginado">
+        <Nav>
+            <Ul className="paginado">
                 { pageNumbers &&
                 pageNumbers.map(number => {
                     return (
-                    <li className="number" key={number}>
+                    <Li className="number" key={number}>
                     <button onClick={() => paginado(number)}>{number}</button>
-                    </li>
+                    </Li>
                 )})}
-            </ul>
-        </nav>
+            </Ul>
+        </Nav>
     )
 }
+
+const Nav = styled.nav`
+  display: flex;
+  justify-content: center;
+`;
+
+const Ul = styled.ul`
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const Li = styled.li`
+  button {
+    background-color: #FFB20D;
+    border: none;
+    color: black;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    &:hover {
+      background-color: #555;
+    }
+  }
+`;
